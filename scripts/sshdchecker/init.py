@@ -11,7 +11,7 @@ class SshDConfigTests:
     def run_tests(self):
         if self.check_permit_root_login():
             self.checks_passed += 1
-        if self.check_empty_passwords():
+        if self.check_permit_empty_passwords():
             selfs.checks_passed += 1
 
     def read_ssh_config(self):
@@ -64,7 +64,7 @@ class SshDConfigTests:
                 print("PubkeyAuthentication not found in file?")
                 return False
 
-    def check_empty_passwords(self):
+    def check_permit_empty_passwords(self):
         for line in self.lines:
             if line.startswith('PermitEmptyPasswords'):
                 key = line.split()[1].strip()
@@ -78,6 +78,7 @@ class SshDConfigTests:
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
                 return False
+    def 
 
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
