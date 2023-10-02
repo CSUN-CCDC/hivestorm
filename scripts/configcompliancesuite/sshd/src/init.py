@@ -2,7 +2,6 @@
 import sys
 
 COMMENT_CHARACTER = "#"
-
 POLICIES = [
         ("PermitRootLogin", 'yes'),
         ("PubkeyAuthentication", 'yes'),
@@ -50,6 +49,7 @@ class FileConfigTests:
                     return True
             elif line.startswith(comment_string):
                 print("DEFAULT: ", line.rstrip())
+                print("The correct value should be: ", POLICY_OPTION)
                 return False
         print("MISSING: ", POLICY_STRING)
         return False
