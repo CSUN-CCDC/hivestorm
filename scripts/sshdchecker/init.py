@@ -16,6 +16,12 @@ class SshDConfigTests:
             self.checks_passed += 1
         if self.check_permit_empty_passwords():
             selfs.checks_passed += 1
+        if self.check_password_authentication():
+            selfs.checks_passed += 1
+        if self.check_allow_agent_forwarding():
+            self.checks_passed += 1
+        if self.check_x11_forwarding():
+            selfs.checks_passed += 1
 
     def read_ssh_config(self):
         try:
@@ -30,8 +36,8 @@ class SshDConfigTests:
 # PubkeyAuthentication
 # PermitEmptyPasswords
 # PasswordAuthentication
-# X11Forwarding
 # AllowAgentForwarding
+# X11Forwarding
 # PrintMotd
     def check_permit_root_login(self):
         for line in self.lines:
@@ -55,10 +61,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'yes':
-                    print("FAILED: ", value)
+                    print("FAILED: ", key)
                     return False
                 else:
-                    print("PASSED: ", value)
+                    print("PASSED: ", key)
                     return True
             elif line.startswith('#PubkeyAuthentication'):
                 print("DEFAULT: ", line)
@@ -73,10 +79,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != no:
-                    print("FAILED: ", value)
+                    print("FAILED: ", key)
                     return False
                 else:
-                    print("PASSED: ", value)
+                    print("PASSED: ", key)
                     return True
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
@@ -86,11 +92,11 @@ class SshDConfigTests:
             if line.startswith('PasswordAuthentication'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != no:
-                    print("FAILED: ", value)
+                if key.lower() != 'no':
+                    print("FAILED: ", key)
                     return False
                 else:
-                    print("PASSED: ", value)
+                    print("PASSED: ", key)
                     return True
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
@@ -100,12 +106,25 @@ class SshDConfigTests:
             if line.startswith('AllowAgentForwarding'):
                 key = line.split()[1].strip()
                 print(line)
-            if key.lower() != no:
-                print("FAILED: ", value)
-                return False
-            else:
-                print("PASSED: ", value)
-                return True
+                if key.lower() != 'no':
+                    print("FAILED: ", key)
+                    return False
+                else:
+                    print("PASSED: ", key)
+                    return True
+
+    def check_x11_forwarding(self):
+        for line in self.lines:
+            if line.startswith('X11Forwarding'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != 'no':
+                    print("FAILED: ", key)
+                    return False
+                else:
+                    print("PASSED: ", key)
+                    return True
+
 
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
