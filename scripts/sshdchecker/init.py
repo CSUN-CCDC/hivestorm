@@ -1,11 +1,5 @@
-from enum import Enum
 
 sshd_config_path = '/etc/ssh/sshd_config'
-
-
-class RetVals(Enum):
-    DEFAULT = {}
-    FAILED = {}
 
 
 class SshDConfigTests:
