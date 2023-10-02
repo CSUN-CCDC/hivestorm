@@ -9,6 +9,14 @@ sshd_config_path = '/etc/ssh/sshd_config'
 # Add more tests
 
 
+POLICY_PERMIT_ROOT_LOGIN= 'yes'
+POLICY_PUBKEY_AUTHENTICATION = 'yes'
+POLICY_PASSWORD_AUTHENTICATION = 'no'
+POLICY_PERMIT_EMPTY_PASSWORDS = 'no'
+POLICY_PRINT_MOTD = 'yes'
+POLICY_X11FORWARDING = 'no'
+POLICY_ALLOW_AGENT_FORWARDING = 'no'
+
 class SshDConfigTests:
     def __init__(self, sshd_config_path):
         self.sshd_config_path = sshd_config_path
@@ -50,7 +58,7 @@ class SshDConfigTests:
             if line.startswith('PermitRootLogin'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'no':
+                if key.lower() != POLICY_PERMIT_ROOT_LOGIN:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -66,7 +74,7 @@ class SshDConfigTests:
             if line.startswith('PubkeyAuthentication'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'yes':
+                if key.lower() != POLICY_PUBKEY_AUTHENTICATION:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -84,7 +92,7 @@ class SshDConfigTests:
             if line.startswith('PermitEmptyPasswords'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != no:
+                if key.lower() != POLICY_PERMIT_EMPTY_PASSWORDS:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -98,7 +106,7 @@ class SshDConfigTests:
             if line.startswith('PasswordAuthentication'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'no':
+                if key.lower() != POLICY_PASSWORD_AUTHENTICATION:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -112,7 +120,7 @@ class SshDConfigTests:
             if line.startswith('AllowAgentForwarding'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'no':
+                if key.lower() != POLICY_ALLOW_AGENT_FORWARDING:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -124,7 +132,7 @@ class SshDConfigTests:
             if line.startswith('X11Forwarding'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'no':
+                if key.lower() != POLICY_X11FORWARDING:
                     print("FAILED: ", line)
                     return False
                 else:
@@ -136,7 +144,7 @@ class SshDConfigTests:
             if line.startswith('PrintMotd'):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != 'yes':
+                if key.lower() != POLICY_PRINT_MOTD:
                     print("FAILED: ", line)
                     return False
                 else:
