@@ -3,7 +3,6 @@ sshd_config_path = '/etc/ssh/sshd_config'
 
 # TODO
 # Handle completely missing lines
-# Don't hardcode the number of tests
 # Colorize Passed/Failed?
 # Add more tests
 
@@ -155,6 +154,10 @@ class SshDConfigTests:
                 else:
                     print("PASSED: ", line)
                     return True
+            if line.startswith('#PrintMotd'):
+                print("DEFAULT: ", line)
+                return False
+
 
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
