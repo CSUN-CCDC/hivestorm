@@ -1,0 +1,1 @@
+These are binaries to use in the hivestorm competition, either statically compiled, or generated with tools like nix-bundle. 
