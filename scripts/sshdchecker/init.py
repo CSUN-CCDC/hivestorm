@@ -3,11 +3,9 @@ sshd_config_path = '/etc/ssh/sshd_config'
 
 # TODO
 # Handle completely missing lines
-# Add a way to specify policy easily for each test
 # Don't hardcode the number of tests
 # Colorize Passed/Failed?
 # Add more tests
-
 
 POLICY_PERMIT_ROOT_LOGIN= 'yes'
 POLICY_PUBKEY_AUTHENTICATION = 'yes'
@@ -20,20 +18,27 @@ POLICY_ALLOW_AGENT_FORWARDING = 'no'
 class SshDConfigTests:
     def __init__(self, sshd_config_path):
         self.sshd_config_path = sshd_config_path
+        self.number_of_tests = 0
         self.checks_passed = 0
         self.lines = self.read_ssh_config()
 
     def run_tests(self):
+        self.number_of_tests += 1
         if self.check_permit_root_login():
             self.checks_passed += 1
+        self.number_of_tests += 1
         if self.check_permit_empty_passwords():
             self.checks_passed += 1
+        self.number_of_tests += 1
         if self.check_password_authentication():
             self.checks_passed += 1
+        self.number_of_tests += 1
         if self.check_allow_agent_forwarding():
             self.checks_passed += 1
+        self.number_of_tests += 1
         if self.check_x11_forwarding():
             self.checks_passed += 1
+        self.number_of_tests += 1
         if self.check_print_motd():
             self.checks_passed += 1
 
@@ -156,10 +161,10 @@ if __name__ == "__main__":
     sshd_tests_instance = SshDConfigTests(sshd_config_path)
 
     sshd_tests_instance.run_tests()
-    print("Tests passed ", sshd_tests_instance.checks_passed, "/", "6")
+    print("Tests passed ", sshd_tests_instance.checks_passed, "/", sshd_tests_instance.number_of_tests)
     if sshd_tests_instance.checks_passed == 6:
         print("All checks passed")
         sys.exit(0)
     else:
         print("Some checks failed")
-        sys.exit(6 - sshd_tests_instance.checks_passed)
+        sys.exit(sshd_tests_instance.number_of_tests - sshd_tests_instance.checks_passed)
