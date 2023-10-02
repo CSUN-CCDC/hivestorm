@@ -3,7 +3,7 @@ import sys
 
 COMMENT_CHARACTER = "#"
 POLICIES = [
-        ("PermitRootLogin", 'yes'),
+        ("PermitRootLogin", 'no'),
         ("PubkeyAuthentication", 'yes'),
         ("PermitEmptyPasswords", 'no'),
         ("AllowAgentForwarding", 'no'),
