@@ -2,4 +2,4 @@
 ## Searches through /home/ for various file extensions we might not like and tees them into a file called "report"
 ### Usage
 
-`$ ./search.sh `
+`$ ./src/search.sh `
