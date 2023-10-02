@@ -1,50 +1,94 @@
 from enum import Enum
 
+sshd_config_path = '/etc/ssh/sshd_config'
 
 class RetVals(Enum):
     DEFAULT = {}
     FAILED = {}
 
 
-class SshChecks():
-    checks_passed = 0
-    checks_defaulted = 0
-    root_login = False
+class SshDConfigTests:
+    def __init__(self, sshd_config_path):
+        self.sshd_config_path = sshd_config_path
+        self.checks_passed = 0
+        self.lines = self.read_ssh_config()
+
+    def run_tests(self):
+        self.check_permit_root_login()
+
+    def read_ssh_config(self):
+        try:
+            with open(self.sshd_config_path, 'r') as file:
+                return file.readlines()
+        except FileNotFoundError:
+            print(f"Error: {self.sshd_config_path} not found.")
+            return []
+
+# Tests
+# PermitRootLogin
+# PubkeyAuthentication
+# PasswordAuthentication
+# PermitEmptyPasswords
+# X11Forwarding
+# AllowAgentForwarding
+# PrintMotd
+    def check_permit_root_login(self):
+        for line in self.lines:
+            if line.startswith('PermitRootLogin'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != 'no':
+                    print("FAILED: ", key)
+                    return False
+                else:
+                    print("PASSED: ", key)
+                    return True
+            # Check if its not set at all
+            elif line.startswith('#PermitRootLogin'):
+                print("DEFAULT: ", line)
+                return False
+
+    def pub_key_authentication(self):
+        for line in self.lines:
+            if line.startswith('PubkeyAuthentication'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != 'yes':
+                    print("FAILED: ", value)
+                    return False
+                else:
+                    print("PASSED: ", value)
+                    return True
+            elif line.startswith('#PubkeyAuthentication'):
+                print("DEFAULT: ", line)
+                return False
+            else:
+                print("PubkeyAuthentication not found in file?")
+                return False
 
 
-def check_root_login():
-    sshd_config_path = '/etc/ssh/sshd_config'
-    try:
-        with open(sshd_config_path, 'r') as file:
-            lines = file.readlines()
-            value = None
-            for line in lines:
-                if line.startswith('PermitRootLogin'):
-                    value = line.split()[1].strip()
-                    print("PermitRootLogin value:", value)
-                    if value.lower() != 'no':
-                        value = line.split()[1].strip()
-                        print("The value is likely set to:", value)
-                        return False
-                    else:
-                        print("PermitRootLogin is likely set to:", value.lower())
-                        return True
-                if line.startswith('#PermitRootLogin'):
-                    print("I saw: ", line)
-                    print("PermitRootLogin is likely set to the default value")
-                    return RetVals.DEFAULT
-    except FileNotFoundError:
-        print(f"Error: {sshd_config_path} not found.")
-        return RetVals.FAILED
-    except Exception as e:
-        print(f"An error occured: {str(e)}")
-        return False
+#def check_empty_passwords(self):
+#    for line in self.lines:
+#        if line.startswith('PermitEmptyPasswords'):
+#            key = line.split()[1].strip()
+#            print(line)
+#            if key.lower() != no:
+#                print("FAILED: ", value)
+#                return False
+#            else:
+#                print("PASSED: ", value)
+#                return True
+#        elif line.startswith('#PermitEmptyPasswords'):
+#            print("DEFAULT: ", line)
+#            return False
+#        else:
+#            print("PermitEmptyPasswords not found in file?")
+#            return False
+#
 
 
 if __name__ == "__main__":
-    ssh_checks_instance = SshChecks()
-    root_login = check_root_login()
+    sshd_config_path = '/etc/ssh/sshd_config'
+    sshd_tests_instance = SshDConfigTests(sshd_config_path)
 
-    if root_login is True:
-        ssh_checks_instance.checks_passed += 1
-    print(ssh_checks_instance.checks_passed)
+    sshd_tests_instance.run_tests()
