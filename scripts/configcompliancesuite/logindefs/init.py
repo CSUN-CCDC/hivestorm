@@ -6,7 +6,7 @@ COMMENT_CHARACTER = "#"
 POLICIES = [
         ("PASS_MAX_DAYS", '30'),
         ("PASS_MIN_DAYS", '10'),
-        ("PASS_WARN_AGE", '8'),
+        ("PASS_WARN_AGE", '7'),
         ]
 
 class FileConfigTests:
@@ -46,6 +46,7 @@ class FileConfigTests:
                 return False
         print("MISSING: ", POLICY_STRING)
         return False
+
 
 if __name__ == "__main__":
     FILE_CONFIG_PATH = '/etc/login.defs'
