@@ -10,6 +10,7 @@ POLICIES = [
         ("XyzzyOption", "true"),
         ]
 
+
 class FileConfigTests:
     def __init__(self, sshd_config_path):
         self.file_config_path = FILE_CONFIG_PATH
@@ -32,21 +33,23 @@ class FileConfigTests:
 
     def check_test_condition(self, POLICY_STRING, POLICY_OPTION):
         self.number_of_tests += 1
-        comment_string = (COMMENT_CHARACTER + POLICY_STRING)
+        comment_string = COMMENT_CHARACTER + POLICY_STRING
         for line in self.lines:
             if line.startswith(POLICY_STRING):
                 key = line.split()[1].strip()
-                print(line)
+                print(line.rstrip())
                 if key.lower() != POLICY_OPTION:
-                    print("FAILED: ", line)
+                    print("FAILED: ", line.rstrip())
+                    print("The correct value should be: ", POLICY_OPTION)
                     return False
                 else:
-                    print("PASSED: ", line)
+                    print("PASSED: ", line.strip())
                     return True
             elif line.startswith(comment_string):
                 return False
         print("MISSING: ", POLICY_STRING)
         return False
+
 
 if __name__ == "__main__":
     FILE_CONFIG_PATH = 'tests/configFile'
