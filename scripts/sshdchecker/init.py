@@ -15,8 +15,10 @@ class SshDConfigTests:
         self.lines = self.read_ssh_config()
 
     def run_tests(self):
-        self.check_permit_root_login()
-        self.check_empty_passwords()
+        if self.check_permit_root_login():
+            self.checks_passed += 1
+        if self.check_empty_passwords():
+            selfs.checks_passed += 1
 
     def read_ssh_config(self):
         try:
@@ -83,9 +85,9 @@ class SshDConfigTests:
                 print("DEFAULT: ", line)
                 return False
 
-
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
     sshd_tests_instance = SshDConfigTests(sshd_config_path)
 
     sshd_tests_instance.run_tests()
+    print("Tests passed ", sshd_tests_instance.checks_passed)
