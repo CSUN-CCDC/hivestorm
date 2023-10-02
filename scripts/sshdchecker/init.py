@@ -1,8 +1,9 @@
+import sys
 sshd_config_path = '/etc/ssh/sshd_config'
 
 # TODO
 # Handle completely missing lines
-#Add a way to specify policy easily for each test
+# Add a way to specify policy easily for each test
 
 
 
@@ -16,13 +17,15 @@ class SshDConfigTests:
         if self.check_permit_root_login():
             self.checks_passed += 1
         if self.check_permit_empty_passwords():
-            selfs.checks_passed += 1
+            self.checks_passed += 1
         if self.check_password_authentication():
-            selfs.checks_passed += 1
+            self.checks_passed += 1
         if self.check_allow_agent_forwarding():
             self.checks_passed += 1
         if self.check_x11_forwarding():
-            selfs.checks_passed += 1
+            self.checks_passed += 1
+        if self.check_print_motd():
+            self.checks_passed += 1
 
     def read_ssh_config(self):
         try:
@@ -126,10 +129,27 @@ class SshDConfigTests:
                     print("PASSED: ", line)
                     return True
 
+    def check_print_motd(self):
+        for line in self.lines:
+            if line.startswith('PrintMotd'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != 'yes':
+                    print("FAILED: ", line)
+                    return False
+                else:
+                    print("PASSED: ", line)
+                    return True
 
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
     sshd_tests_instance = SshDConfigTests(sshd_config_path)
 
     sshd_tests_instance.run_tests()
-    print("Tests passed ", sshd_tests_instance.checks_passed)
+    print("Tests passed ", sshd_tests_instance.checks_passed, "/", "6")
+    if sshd_tests_instance.checks_passed == 6:
+        print("All checks passed")
+        sys.exit(0)
+    else:
+        print("Some checks failed")
+        sys.exit(1)
