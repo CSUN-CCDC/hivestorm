@@ -4,7 +4,9 @@ sshd_config_path = '/etc/ssh/sshd_config'
 # TODO
 # Handle completely missing lines
 # Add a way to specify policy easily for each test
-
+# Don't hardcode the number of tests
+# Colorize Passed/Failed?
+# Add more tests
 
 
 class SshDConfigTests:
@@ -152,4 +154,4 @@ if __name__ == "__main__":
         sys.exit(0)
     else:
         print("Some checks failed")
-        sys.exit(1)
+        sys.exit(6 - sshd_tests_instance.checks_passed)
