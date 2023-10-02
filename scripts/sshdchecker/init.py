@@ -1,5 +1,8 @@
-
 sshd_config_path = '/etc/ssh/sshd_config'
+
+# TODO
+# Handle completely missing lines
+
 
 
 class SshDConfigTests:
@@ -78,8 +81,20 @@ class SshDConfigTests:
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
                 return False
-    def 
-
+    def check_password_authentication(self):
+        for line in self.lines:
+            if line.startswith('PasswordAuthentication'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != no:
+                    print("FAILED: ", value)
+                    return False
+                else:
+                    print("PASSED: ", value)
+                    return True
+            elif line.startswith('#PermitEmptyPasswords'):
+                print("DEFAULT: ", line)
+                return False
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
     sshd_tests_instance = SshDConfigTests(sshd_config_path)
