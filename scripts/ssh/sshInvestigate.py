@@ -11,6 +11,7 @@ class SshChecks():
     checks_defaulted = 0
     root_login = False
 
+
 def check_root_login():
     sshd_config_path = '/etc/ssh/sshd_config'
     try:
@@ -29,7 +30,7 @@ def check_root_login():
                         print("PermitRootLogin is likely set to:", value.lower())
                         return True
                 if line.startswith('#PermitRootLogin'):
-                    print("I saw: ",line)
+                    print("I saw: ", line)
                     print("PermitRootLogin is likely set to the default value")
                     return RetVals.DEFAULT
     except FileNotFoundError:
@@ -44,6 +45,6 @@ if __name__ == "__main__":
     ssh_checks_instance = SshChecks()
     root_login = check_root_login()
 
-    if root_login:
+    if root_login is True:
         ssh_checks_instance.checks_passed += 1
     print(ssh_checks_instance.checks_passed)
