@@ -1,6 +1,7 @@
 ## This is a list of anything tagged "games" in dpkg-control
 
 Created with
+
 `$ grep-aptavail -n -F Section -s Package games > listofgames`
 
 to uninstall all things games
