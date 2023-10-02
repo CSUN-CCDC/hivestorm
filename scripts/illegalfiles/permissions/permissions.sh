@@ -5,7 +5,7 @@ find "/home/" -type f -exec bash -c '
 		echo "File: $file"
 			stat -c "%A" "$file"
 			echo "$file has the executable bit set!"
-			echo "$file" > report
+			echo "$file" >> report
 		fi
 done
 ' bash {} + 

@@ -1,4 +1,4 @@
-#permissions.sh
+# permissions.sh
 ## Permissions checker for *NIX like file systems
 
 ### Behavior
