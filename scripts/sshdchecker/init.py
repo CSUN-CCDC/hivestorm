@@ -28,8 +28,8 @@ class SshDConfigTests:
 # Tests
 # PermitRootLogin
 # PubkeyAuthentication
-# PasswordAuthentication
 # PermitEmptyPasswords
+# PasswordAuthentication
 # X11Forwarding
 # AllowAgentForwarding
 # PrintMotd
@@ -95,6 +95,18 @@ class SshDConfigTests:
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
                 return False
+    def check_allow_agent_forwarding(self):
+        for line in self.lines:
+            if line.startswith('AllowAgentForwarding'):
+                key = line.split()[1].strip()
+                print(line)
+            if key.lower() != no:
+                print("FAILED: ", value)
+                return False
+            else:
+                print("PASSED: ", value)
+                return True
+
 if __name__ == "__main__":
     sshd_config_path = '/etc/ssh/sshd_config'
     sshd_tests_instance = SshDConfigTests(sshd_config_path)
