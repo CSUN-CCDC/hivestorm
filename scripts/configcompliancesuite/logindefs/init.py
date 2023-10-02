@@ -5,7 +5,7 @@ COMMENT_CHARACTER = "#"
 
 POLICIES = [
         ("PASS_MAX_DAYS", '30'),
-        ("PAX_MIN_DAYS", '10'),
+        ("PASS_MIN_DAYS", '10'),
         ("PASS_WARN_AGE", '8'),
         ]
 
