@@ -2,6 +2,7 @@ from enum import Enum
 
 sshd_config_path = '/etc/ssh/sshd_config'
 
+
 class RetVals(Enum):
     DEFAULT = {}
     FAILED = {}
@@ -15,6 +16,7 @@ class SshDConfigTests:
 
     def run_tests(self):
         self.check_permit_root_login()
+        self.check_empty_passwords()
 
     def read_ssh_config(self):
         try:
@@ -66,25 +68,20 @@ class SshDConfigTests:
                 print("PubkeyAuthentication not found in file?")
                 return False
 
-
-#def check_empty_passwords(self):
-#    for line in self.lines:
-#        if line.startswith('PermitEmptyPasswords'):
-#            key = line.split()[1].strip()
-#            print(line)
-#            if key.lower() != no:
-#                print("FAILED: ", value)
-#                return False
-#            else:
-#                print("PASSED: ", value)
-#                return True
-#        elif line.startswith('#PermitEmptyPasswords'):
-#            print("DEFAULT: ", line)
-#            return False
-#        else:
-#            print("PermitEmptyPasswords not found in file?")
-#            return False
-#
+    def check_empty_passwords(self):
+        for line in self.lines:
+            if line.startswith('PermitEmptyPasswords'):
+                key = line.split()[1].strip()
+                print(line)
+                if key.lower() != no:
+                    print("FAILED: ", value)
+                    return False
+                else:
+                    print("PASSED: ", value)
+                    return True
+            elif line.startswith('#PermitEmptyPasswords'):
+                print("DEFAULT: ", line)
+                return False
 
 
 if __name__ == "__main__":
