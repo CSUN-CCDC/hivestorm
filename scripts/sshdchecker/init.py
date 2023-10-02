@@ -2,6 +2,7 @@ sshd_config_path = '/etc/ssh/sshd_config'
 
 # TODO
 # Handle completely missing lines
+#Add a way to specify policy easily for each test
 
 
 
@@ -45,10 +46,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'no':
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
             # Check if its not set at all
             elif line.startswith('#PermitRootLogin'):
@@ -61,10 +62,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'yes':
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
             elif line.startswith('#PubkeyAuthentication'):
                 print("DEFAULT: ", line)
@@ -79,10 +80,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != no:
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
@@ -93,10 +94,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'no':
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
@@ -107,10 +108,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'no':
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
 
     def check_x11_forwarding(self):
@@ -119,10 +120,10 @@ class SshDConfigTests:
                 key = line.split()[1].strip()
                 print(line)
                 if key.lower() != 'no':
-                    print("FAILED: ", key)
+                    print("FAILED: ", line)
                     return False
                 else:
-                    print("PASSED: ", key)
+                    print("PASSED: ", line)
                     return True
 
 
