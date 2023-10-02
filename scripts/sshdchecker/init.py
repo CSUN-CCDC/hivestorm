@@ -152,4 +152,4 @@ if __name__ == "__main__":
         sys.exit(0)
     else:
         print("Some checks failed")
-        sys.exit(1)
+        sys.exit(6 - sshd_tests_instance.checks_passed)
