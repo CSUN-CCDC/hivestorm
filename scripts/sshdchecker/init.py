@@ -105,6 +105,7 @@ class SshDConfigTests:
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
                 return False
+
     def check_password_authentication(self):
         for line in self.lines:
             if line.startswith('PasswordAuthentication'):
@@ -119,6 +120,7 @@ class SshDConfigTests:
             elif line.startswith('#PermitEmptyPasswords'):
                 print("DEFAULT: ", line)
                 return False
+
     def check_allow_agent_forwarding(self):
         for line in self.lines:
             if line.startswith('AllowAgentForwarding'):
@@ -130,6 +132,8 @@ class SshDConfigTests:
                 else:
                     print("PASSED: ", line)
                     return True
+            if line.startswith('#PrintMotd'):
+                print("DEFAULT: ", line)
 
     def check_x11_forwarding(self):
         for line in self.lines:
@@ -165,7 +169,7 @@ if __name__ == "__main__":
 
     sshd_tests_instance.run_tests()
     print("Tests passed ", sshd_tests_instance.checks_passed, "/", sshd_tests_instance.number_of_tests)
-    if sshd_tests_instance.checks_passed == 6:
+    if sshd_tests_instance.checks_passed == sshd_tests_instance.number_of_tests:
         print("All checks passed")
         sys.exit(0)
     else:
