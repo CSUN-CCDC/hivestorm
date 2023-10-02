@@ -2,7 +2,7 @@ This is the "nonotools" list.
 
 Created by looking at the Kali Linux metapackages, using this command:
 
-`apt-cache depends METAPAGE | grep Depends | awk '{print $2}' | tee output-file`
+`apt-cache depends METAPACKAGE | grep Depends | awk '{print $2}' | tee output-file`
 
 
 To uninstall any installed "nonotools" on Debian based distros:
