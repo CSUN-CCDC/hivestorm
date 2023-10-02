@@ -1,8 +1,13 @@
 import sys
 
-POLICY_SAMPLE_FILE_STRING = "SamplePolicy"
-POLICY_SAMPLE_POLICY_OPTION = 'yes'
-POLICY_SAMPLE_POLICY_OPTION = 'yes'
+COMMENT_CHARACTER = "#"
+POLICIES = [
+        ("PermitRootLogin", 'yes'),
+        ("PubkeyAuthentication", 'yes'),
+        ("PermitEmptyPasswords", 'no'),
+        ("AllowAgentForwarding", 'no'),
+        ("X11Forwarding", 'no'),
+        ]
 
 class FileConfigTests:
     def __init__(self, sshd_config_path):
@@ -12,9 +17,9 @@ class FileConfigTests:
         self.lines = self.read_file_config()
 
     def run_tests(self):
-        self.number_of_tests += 1
-        if self.check_test_condition():
-            self.checks_passed += 1
+        for policy_string, policy_option in POLICIES:
+            if self.check_test_condition(policy_string, policy_option):
+                self.checks_passed += 1
 
     def read_file_config(self):
         try:
@@ -24,28 +29,31 @@ class FileConfigTests:
             print(f"Error: {self.file_config_path} not found.")
             return []
 
-    def check_test_condition(self):
+    def check_test_condition(self, POLICY_STRING, POLICY_OPTION):
+        self.number_of_tests += 1
+        comment_string = (COMMENT_CHARACTER + POLICY_STRING)
         for line in self.lines:
-            if line.startswith(POLICY_SAMPLE_FILE_STRING):
+            if line.startswith(POLICY_STRING):
                 key = line.split()[1].strip()
                 print(line)
-                if key.lower() != POLICY_SAMPLE_POLICY_OPTION:
+                if key.lower() != POLICY_OPTION:
                     print("FAILED: ", line)
                     return False
                 else:
                     print("PASSED: ", line)
                     return True
-            elif line.startswith('#', POLICY_SAMPLE_FILE_STRING):
-                print("DEFAULT: ", line)
+            elif line.startswith(comment_string):
+                print("DEFAULT: ", comment_string)
                 return False
-
+        print("MISSING: ", POLICY_STRING)
+        return False
 
 if __name__ == "__main__":
-    FILE_CONFIG_PATH = 'tests/configFile'
+    FILE_CONFIG_PATH = '/etc/ssh/sshd_config'
     file_tests_instance = FileConfigTests(FILE_CONFIG_PATH)
 
     file_tests_instance.run_tests()
-    print("Tests passed ", file_tests_instance.checks_passed, "/", file_tests_instance.number_of_tests)
+    print("Checks passed ", file_tests_instance.checks_passed, "/", file_tests_instance.number_of_tests)
     if file_tests_instance.number_of_tests == file_tests_instance.checks_passed:
         print("All checks passed")
         sys.exit(0)
