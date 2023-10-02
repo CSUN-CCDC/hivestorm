@@ -2,15 +2,15 @@
 import sys
 
 COMMENT_CHARACTER = "#"
+
+
 POLICIES = [
-        ("PermitRootLogin", 'no'),
-        ("PubkeyAuthentication", 'yes'),
-        ("PermitEmptyPasswords", 'no'),
-        ("AllowAgentForwarding", 'no'),
-        ("X11Forwarding", 'no'),
-        ]
-
-
+    ("PermitRootLogin", 'no'),
+    ("PubkeyAuthentication", 'yes'),
+    ("PermitEmptyPasswords", 'no'),
+    ("AllowAgentForwarding", 'no'),
+    ("X11Forwarding", 'no'),
+    ]
 
 
 class FileConfigTests:
