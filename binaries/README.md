@@ -11,4 +11,4 @@ Or use wget, since sometimes curl isn't installed by default.
 
 `chmod +x /bin/nix-portable`
 
-Then cd into this git repo, 
+Since nix-portable sets up flakes, my goal is for there to be a preconfigured shell with all the tools we could use. 

@@ -9,7 +9,11 @@
   outputs = { self, nixpkgs }: {
     nixConfigurations = {
       default = {
-        packages = [ nixpkgs.bash ];
+        packages = [ 
+          nixpkgs.bash
+          nixpkgs.zellij
+          nixpkgs.fsearch 
+        ];
       };
     };
   };

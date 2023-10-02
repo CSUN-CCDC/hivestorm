@@ -7,10 +7,14 @@
   };
 
   outputs = { self, nixpkgs }: {
-    nixConfigurations = {
-      default = {
-        packages = [ nixpkgs.bash ];
-      };
+      packages.x86_64-linux.default =
+        with import nixpkgs { system = "x86_64-linux"; };
+        pkgs.mkShell {
+            buildInputs = with import nixpkgs { system = "x86_64-linux"; }; [
+                zellij
+                fsearch
+                bash
+            ];
     };
   };
 }
