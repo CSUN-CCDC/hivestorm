@@ -4,9 +4,8 @@
 ### Sample Usage
 `$ python3 init.py`
 
-On fialure, returns the number of checks failed.
+On failure, returns the number of checks failed.
 
 `$ echo $?`
 
-### Currently '#' is hardcoded as the comment character
 ` 
