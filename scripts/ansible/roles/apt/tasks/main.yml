@@ -1,11 +1,13 @@
+---
 - name: backup apt sources
   ansible.builtin.copy:
     src: /etc/apt/
     dest: /etc/apt.bac/
-  name: remove apt sources
-  ansible.builtin.remove:
+- name: remove apt sources
+  ansible.builtin.file:
     path: /etc/apt/
     state: absent
-  name: Put new ansible files in the correct spot
-  ansible.builtin.copy
-    src: templates/{{ ansible}}
+- name: Put new ansible files in the correct spot
+  ansible.builtin.copy:
+    src: templates/{{ ansible_facts['distribution_release'] }}/
+    dest: /etc/apt/

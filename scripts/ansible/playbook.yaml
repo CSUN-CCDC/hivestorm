@@ -4,6 +4,7 @@
   hosts: all
 
   roles:
-    - name: logindefs
-    - name: pwquality     
-    - name: sshd
+    #- name: logindefs
+    #- name: pwquality     
+    #- name: sshd
+    - name: apt
