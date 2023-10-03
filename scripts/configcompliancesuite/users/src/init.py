@@ -6,6 +6,7 @@ USERS = [
         ("beep")
         ]
 
+
 class FileConfigTests:
     def __init__(self, sshd_config_path):
         self.file_config_path = FILE_CONFIG_PATH
@@ -27,8 +28,8 @@ class FileConfigTests:
             return []
 
     def check_test_condition(self, user):
-        self.number_of_tests += 1
         for line in self.lines:
+            self.number_of_tests += 1
             if line.startswith(user):
                 print(line.rstrip())
                 print("GOOD USER: ", user)
@@ -36,15 +37,16 @@ class FileConfigTests:
             else:
                 print("BAD USER: ", line.rstrip())
 
+
 if __name__ == "__main__":
     FILE_CONFIG_PATH = '/etc/passwd'
     file_tests_instance = FileConfigTests(FILE_CONFIG_PATH)
 
     file_tests_instance.run_tests()
-    print("Checks passed ", file_tests_instance.checks_passed, "/", file_tests_instance.number_of_tests)
+    print("Users cleared", file_tests_instance.checks_passed, "/", file_tests_instance.number_of_tests)
     if file_tests_instance.number_of_tests == file_tests_instance.checks_passed:
-        print("All checks passed")
+        print("All users cleared")
         sys.exit(0)
     else:
-        print("Some checks failed")
+        print("Some users bad")
         sys.exit(file_tests_instance.number_of_tests - file_tests_instance.checks_passed)
