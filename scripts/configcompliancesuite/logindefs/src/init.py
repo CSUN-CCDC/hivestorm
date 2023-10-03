@@ -54,7 +54,7 @@ class FileConfigTests:
 
 
 if __name__ == "__main__":
-    FILE_CONFIG_PATH = 'tests/configFile'
+    FILE_CONFIG_PATH = '/etc/login.defs'
     file_tests_instance = FileConfigTests(FILE_CONFIG_PATH)
 
     file_tests_instance.run_tests()
