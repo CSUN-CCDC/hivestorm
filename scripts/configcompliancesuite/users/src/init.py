@@ -1,11 +1,10 @@
 import sys
 
-
 USERS = [
         ("admin"),
-        ("micheal")
+        ("micheal"),
+        ("beep")
         ]
-
 
 class FileConfigTests:
     def __init__(self, sshd_config_path):
