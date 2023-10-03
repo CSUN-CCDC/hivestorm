@@ -1,19 +1,9 @@
 ---
 - name: 
   become: yes  # If you need to run tasks with elevated privileges, such as sudo
+  hosts: all
 
   roles:
-    - name: logindefs  # Replace with the name of the role you want to use      
-  tasks:
-    - name: Another task
-      # Add additional tasks that are not part of the roles here
-      # For example, you can include tasks specific to this playbook.
-      # You can also use variables defined in the roles.
-
-    - name: Yet another task
-      # Another task example
-
-  handlers:
-    - name: Restart Apache
-      # Define handlers for tasks in the roles or playbook tasks.
-      # Handlers are typically used to restart services when
+    - name: logindefs
+    - name: pwquality     
+    - name: sshd
