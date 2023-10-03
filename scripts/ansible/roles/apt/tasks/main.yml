@@ -1,0 +1,4 @@
+- name: Run a podman using distro facts
+      # distribution_version, or distribution-major version, or distribution_release I think works here
+      ansible.builtin.shell: "podman run -v "/:/stuff" docker.io/{{ ansible_facts['distibution'] | lower }}:{{ansible_facts['distribution_version']}} 
+      register: command_output
