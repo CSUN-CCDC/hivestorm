@@ -51,11 +51,11 @@ For more info, see `fd --help`
 
 To find any executables:
 
-`find /path/ --type executable --hidden --follow`
+`find /path/ --type executable --hidden --follow --no-ignore`
 
 A shorter version:
 
-`find /path --type x -H -L`
+`find /path --type x -u`
 
 We can use this to find any executable files, like any shell scripts that should not be there.
 
