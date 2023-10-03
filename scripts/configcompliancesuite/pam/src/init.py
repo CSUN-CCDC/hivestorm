@@ -1,16 +1,11 @@
-
 import sys
 
 COMMENT_CHARACTER = "#"
 
 
 POLICIES = [
-    ("PermitRootLogin", 'no'),
-    ("PubkeyAuthentication", 'yes'),
-    ("PermitEmptyPasswords", 'no'),
-    ("AllowAgentForwarding", 'no'),
-    ("X11Forwarding", 'no'),
-    ]
+        ("password", '[success=1 default=ignore] pam_unix.so obscure yescrypt minlen=12'),
+        ]
 
 
 class FileConfigTests:
@@ -56,7 +51,7 @@ class FileConfigTests:
 
 
 if __name__ == "__main__":
-    FILE_CONFIG_PATH = '/etc/ssh/sshd_config'
+    FILE_CONFIG_PATH = '/etc/pam.d/common-password'
     file_tests_instance = FileConfigTests(FILE_CONFIG_PATH)
 
     file_tests_instance.run_tests()

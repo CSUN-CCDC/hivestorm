@@ -43,16 +43,18 @@ class FileConfigTests:
                     print("The correct value should be: ", POLICY_OPTION)
                     return False
                 else:
-                    print("PASSED: ", line.strip())
+                    print("PASSED: ", line.rstrip())
                     return True
             elif line.startswith(comment_string):
+                print("DEFAULT: ", line.rstrip())
+                print("The correct value should be: ", POLICY_OPTION)
                 return False
         print("MISSING: ", POLICY_STRING)
         return False
 
 
 if __name__ == "__main__":
-    FILE_CONFIG_PATH = '../tests/configFile'
+    FILE_CONFIG_PATH = 'tests/configFile'
     file_tests_instance = FileConfigTests(FILE_CONFIG_PATH)
 
     file_tests_instance.run_tests()
