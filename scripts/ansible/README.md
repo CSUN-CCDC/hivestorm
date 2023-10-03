@@ -1,5 +1,18 @@
 Here is where I'm going to make ansible playbooks to run, to configure things like pamd.
 
+
+
+I currently have some stuff done. To run it (I only tested it in an ubuntu docker container): 
+
+with the ansible directory of this repo as your working directory:
+
+`ansible-playbook --inventory inventory/ playbook.yaml`
+
+
+
+
+
+
 The ansible modules I am looking at are:
 
 
