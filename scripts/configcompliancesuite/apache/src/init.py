@@ -46,7 +46,6 @@ class FileConfigTests:
             elif line.startswith(comment_string):
                 print("DEFAULT: ", line.rstrip())
                 print("The correct value should be: ", POLICY_OPTION)
-                return False
         print("MISSING: ", POLICY_STRING)
         return False
 
