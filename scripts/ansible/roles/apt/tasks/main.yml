@@ -1,4 +1,11 @@
-- name: Run a podman using distro facts
-      # distribution_version, or distribution-major version, or distribution_release I think works here
-      ansible.builtin.shell: "podman run -v "/:/stuff" docker.io/{{ ansible_facts['distibution'] | lower }}:{{ansible_facts['distribution_version']}} 
-      register: command_output
+- name: backup apt sources
+  ansible.builtin.copy:
+    src: /etc/apt/
+    dest: /etc/apt.bac/
+  name: remove apt sources
+  ansible.builtin.remove:
+    path: /etc/apt/
+    state: absent
+  name: Put new ansible files in the correct spot
+  ansible.builtin.copy
+    src: templates/{{ ansible}}
