@@ -1,7 +1,7 @@
 ---
   - name: configure sshd
     ansible.builtin.lineinfile:
-      dest: /etc/ssh/ssh_config
+      dest: /etc/ssh/sshd_config
       regexp: "^{{ item.parameter }}"
       line: "{{ item.parameter }} {{ item.value }}"
       state: present
@@ -16,6 +16,8 @@
     - parameter: AllowAgentForwarding
       value: "no"
     - parameter: X11Forwarding
+      value: "no"
+    - parameter: PasswordAuthentication
       value: "no"
   - name: Find files and directories in ssh directory
     ansible.builtin.find:
