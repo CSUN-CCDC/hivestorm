@@ -3,5 +3,3 @@
 
 ### Sample Usage
 `$ python3 src/perms.py`
-
-`$ echo $?`
