@@ -13,6 +13,12 @@
 
 `net user USERNAME *`
 
+### #5 Check group policies and make sure they're in accordance to the README
+
+### #6 Remove SMBv1 ffs it's scary do you want to ger wannacry or something?
+
+### #7 Monitor Processes with the Process Explorer
+
 ### Answer Key for the Mario machine that has some useful tips
 
 https://drive.google.com/file/d/16Bggptd-y-WR8CFA2BhkGPrLSV0yzqaO/view
