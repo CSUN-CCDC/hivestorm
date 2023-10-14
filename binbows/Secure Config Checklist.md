@@ -15,7 +15,15 @@
 
 ### #5 Check group policies and make sure they're in accordance to the README
 
-### #6 Remove SMBv1 ffs it's scary do you want to ger wannacry or something?
+### #6 Remove SMBv1 ffs it's scary do you want to ger wannacry or something? 
+
+Use this command to see if it's enabled
+
+`Get-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`
+
+Use this to disable it
+
+`Disable-WindowsOptionalFeature -Online -FeatureName SMB1Protocol`
 
 ### #7 Monitor Processes with the Process Explorer
 
