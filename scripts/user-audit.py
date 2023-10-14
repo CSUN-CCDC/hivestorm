@@ -103,3 +103,5 @@ def user_auditing():
             
             else:
                 print("Error. Only choose yes or no!")
+
+user_auditing()
