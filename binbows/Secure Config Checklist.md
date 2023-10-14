@@ -16,4 +16,7 @@
 ### Answer Key for the Mario machine that has some useful tips
 
 https://drive.google.com/file/d/16Bggptd-y-WR8CFA2BhkGPrLSV0yzqaO/view
-h e l p
+
+### as well as this cool holy grail file https://downloads.cisecurity.org/#/ 
+
+h e l p im just a little eepy linux guy tf is a gui
