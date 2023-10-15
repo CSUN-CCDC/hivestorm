@@ -19,7 +19,7 @@
     #  tags: pwquality
     - name: sshd
       tags: sshd
-      #when: "'openssh-server' in ansible_facts.packages"
+      when: "'openssh-server' in ansible_facts.packages"
     - name: apt
       tags: apt
       when: not ansible.builtin.stat(path='/etc/apt.bac').stat.exists
